@@ -11,6 +11,8 @@
 		43975E922B53ADC1008465EE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43975E912B53ADC1008465EE /* ContentView.swift */; };
 		43975E942B53ADC2008465EE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 43975E932B53ADC2008465EE /* Assets.xcassets */; };
 		43975E972B53ADC2008465EE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 43975E962B53ADC2008465EE /* Preview Assets.xcassets */; };
+		43E9FCF52B53B5D300DB89E7 /* TaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E9FCF42B53B5D300DB89E7 /* TaskView.swift */; };
+		43E9FCF72B53B61E00DB89E7 /* TaskStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E9FCF62B53B61E00DB89E7 /* TaskStatusView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +21,8 @@
 		43975E912B53ADC1008465EE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		43975E932B53ADC2008465EE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		43975E962B53ADC2008465EE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		43E9FCF42B53B5D300DB89E7 /* TaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskView.swift; sourceTree = "<group>"; };
+		43E9FCF62B53B61E00DB89E7 /* TaskStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskStatusView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,9 +55,11 @@
 		43975E8E2B53ADC1008465EE /* Siroo */ = {
 			isa = PBXGroup;
 			children = (
+				43975EA02B53B144008465EE /* Resources */,
+				43975E9F2B53B133008465EE /* ViewModels */,
+				43975E9E2B53B106008465EE /* Views */,
+				43975E9D2B53B0F8008465EE /* Models */,
 				43975E8F2B53ADC1008465EE /* SirooApp.swift */,
-				43975E912B53ADC1008465EE /* ContentView.swift */,
-				43975E932B53ADC2008465EE /* Assets.xcassets */,
 				43975E952B53ADC2008465EE /* Preview Content */,
 			);
 			path = Siroo;
@@ -65,6 +71,38 @@
 				43975E962B53ADC2008465EE /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		43975E9D2B53B0F8008465EE /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		43975E9E2B53B106008465EE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				43975E912B53ADC1008465EE /* ContentView.swift */,
+				43E9FCF42B53B5D300DB89E7 /* TaskView.swift */,
+				43E9FCF62B53B61E00DB89E7 /* TaskStatusView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		43975E9F2B53B133008465EE /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		43975EA02B53B144008465EE /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				43975E932B53ADC2008465EE /* Assets.xcassets */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,6 +176,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				43975E922B53ADC1008465EE /* ContentView.swift in Sources */,
+				43E9FCF72B53B61E00DB89E7 /* TaskStatusView.swift in Sources */,
+				43E9FCF52B53B5D300DB89E7 /* TaskView.swift in Sources */,
 				43975E902B53ADC1008465EE /* SirooApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
