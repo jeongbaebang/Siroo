@@ -60,14 +60,20 @@ class TaskViewViewModel: ObservableObject {
     private func startTimer() {
         if timer == nil {
             timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
-                self?.secondsElapsed += 1
+                guard let strongSelf = self else {
+                    return
+                }
+                
+                strongSelf.secondsElapsed += 1
             }
         }
     }
     
     private func stopTimer() {
-        timer?.invalidate()
-        timer = nil
+        if let timer = self.timer {
+            timer.invalidate()
+            self.timer = nil
+        }
     }
     
     func activeStopWatch() {
