@@ -13,9 +13,7 @@ struct TaskView: View {
 
     var body: some View {
         VStack {
-            Text("00:00:00")
-                .font(.largeTitle)
-                .fontWeight(.bold)
+            Stopwatch(secondsElapsed: viewModel.secondsElapsed)
 
             Spacer()
             
