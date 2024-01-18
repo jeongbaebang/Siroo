@@ -26,11 +26,13 @@ class TaskViewViewModel: ObservableObject {
     }
     
     private func setupLifecycleObserver() {
-        NotificationCenter.default.addObserver(forName: UIApplication.didEnterBackgroundNotification, object: nil, queue: .main) { [weak self] _ in
+        let center = NotificationCenter.default
+        
+        center.addObserver(forName: UIApplication.didEnterBackgroundNotification, object: nil, queue: .main) { [weak self] _ in
             self?.pauseTimerIfNeeded()
         }
         
-        NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: .main) { [weak self] _ in
+        center.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: .main) { [weak self] _ in
             self?.resumeTimerIfNeeded()
         }
     }
@@ -42,18 +44,20 @@ class TaskViewViewModel: ObservableObject {
     private func pauseTimerIfNeeded() {
         if isActive {
             lastBackgroundTime = Date()
+            
             stopTimer()
         }
     }
     
     private func resumeTimerIfNeeded() {
-        if isActive {
-            if let lastBackgroundTime = lastBackgroundTime {
-                let timeInBackground = Date().timeIntervalSince(lastBackgroundTime)
-                secondsElapsed += Int(timeInBackground)
-            }
-            startTimer()
+        if !isActive { return }
+        
+        if let lastBackgroundTime = lastBackgroundTime {
+            let timeInBackground = Date().timeIntervalSince(lastBackgroundTime)
+            secondsElapsed += Int(timeInBackground)
         }
+        
+        startTimer()
     }
 
     
@@ -72,6 +76,7 @@ class TaskViewViewModel: ObservableObject {
     private func stopTimer() {
         if let timer = self.timer {
             timer.invalidate()
+            
             self.timer = nil
         }
     }
