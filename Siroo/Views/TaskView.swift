@@ -23,7 +23,7 @@ struct TaskView: View {
                         viewModel.activeStopWatch()
                     }
                 } else {
-                    CustomButton(title: "작업 일시정지", systemImage: "stop.fill", color: .red, isDisabled: !viewModel.isPause) {
+                    CustomButton(title: "작업 일시정지", systemImage: "stop.fill", color: .red, isDisabled: false) {
                         viewModel.deactivateStopWatch()
                     }
                 }

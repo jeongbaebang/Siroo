@@ -15,37 +15,81 @@ class TaskViewViewModel: ObservableObject {
     @Published var secondsElapsed = 0
     
     private var timer: Timer?
+    private var lastBackgroundTime: Date?
     
-    func startTimer() {
-        self.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-            self.secondsElapsed += 1
+    init() {
+        setupLifecycleObserver()
+    }
+    
+    deinit {
+        cleanupLifecycleObserver()
+    }
+    
+    private func setupLifecycleObserver() {
+        NotificationCenter.default.addObserver(forName: UIApplication.didEnterBackgroundNotification, object: nil, queue: .main) { [weak self] _ in
+            self?.pauseTimerIfNeeded()
+        }
+        
+        NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: .main) { [weak self] _ in
+            self?.resumeTimerIfNeeded()
         }
     }
     
-    func stopTimer() {
-        self.timer?.invalidate()
+    private func cleanupLifecycleObserver() {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    private func pauseTimerIfNeeded() {
+        if isActive {
+            lastBackgroundTime = Date()
+            stopTimer()
+        }
+    }
+    
+    private func resumeTimerIfNeeded() {
+        if isActive {
+            if let lastBackgroundTime = lastBackgroundTime {
+                let timeInBackground = Date().timeIntervalSince(lastBackgroundTime)
+                secondsElapsed += Int(timeInBackground)
+            }
+            startTimer()
+        }
+    }
+
+    
+    private func startTimer() {
+        if timer == nil {
+            timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
+                self?.secondsElapsed += 1
+            }
+        }
+    }
+    
+    private func stopTimer() {
+        timer?.invalidate()
         timer = nil
     }
     
     func activeStopWatch() {
-        startTimer()
+        isActive = true
+        isPause = false
+        isDone = false
         
-        self.isActive = true
-        self.isPause = true
-        self.isDone = false
+        startTimer()
     }
     
     func deactivateStopWatch() {
-        stopTimer()
+        isActive = false
+        isPause = true
         
-        self.isActive = false
+        stopTimer()
     }
     
     func completeTask() {
-        stopTimer()
+        isActive = false
+        isPause = false
+        isDone = true
         
-        self.isActive = false
-        self.isPause = false
-        self.isDone = true
+        stopTimer()
     }
 }
