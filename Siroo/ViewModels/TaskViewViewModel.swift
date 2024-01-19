@@ -81,6 +81,14 @@ class TaskViewViewModel: ObservableObject {
         }
     }
     
+    public var isCanSave: Bool {
+        return secondsElapsed != 0
+    }
+    
+    public var isCanComplete: Bool {
+        return isDone == true && isCanSave
+    }
+    
     func activeStopWatch() {
         isActive = true
         isPause = false
@@ -102,5 +110,12 @@ class TaskViewViewModel: ObservableObject {
         isDone = true
         
         stopTimer()
+    }
+    
+    func initTask() {
+        isActive = false
+        isPause = false
+        isDone = true
+        secondsElapsed = 0
     }
 }
