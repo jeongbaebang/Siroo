@@ -9,10 +9,19 @@ import Foundation
 import UIKit
 
 class TaskViewViewModel: ObservableObject {
+    @Published var activeID: UUID?
     @Published var isActive = false
     @Published var isPause = false
     @Published var isDone = true
     @Published var secondsElapsed = 0
+    @Published var taskItemList: [TaskItem] = [
+        .init(systemName: "heart.fill", label: "작업#1"),
+        .init(systemName: "heart.fill", label: "작업#2"),
+        .init(systemName: "heart.fill", label: "작업#3"),
+        .init(systemName: "heart.fill", label: "작업#4"),
+        .init(systemName: "heart.fill", label: "작업#5"),
+        .init(systemName: "heart.fill", label: "작업#6")
+    ]
     
     private var timer: Timer?
     private var lastBackgroundTime: Date?
@@ -108,6 +117,7 @@ class TaskViewViewModel: ObservableObject {
         isActive = false
         isPause = false
         isDone = true
+        activeID = nil
         
         stopTimer()
     }
@@ -116,6 +126,8 @@ class TaskViewViewModel: ObservableObject {
         isActive = false
         isPause = false
         isDone = true
+        activeID = nil
+    
         secondsElapsed = 0
     }
 }

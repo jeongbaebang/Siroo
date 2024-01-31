@@ -13,14 +13,15 @@ struct CustomButton: View {
     let color: Color
     let isDisabled: Bool
     let action: () -> Void
-
+    let buttonWidth: CGFloat = 206
+    
     var body: some View {
         Button(action: action) {
             Label(title, systemImage: systemImage)
                 .foregroundStyle(isDisabled ? .gray : color)
                 .font(.body)
                 .fontWeight(.regular)
-                .frame(width: 206, alignment: .center)
+                .frame(width: buttonWidth, alignment: .center)
         }
         .buttonStyle(.bordered)
         .controlSize(.large)
@@ -30,10 +31,10 @@ struct CustomButton: View {
 
 #Preview {
     VStack(spacing: 20) {
-        CustomButton(title: "작업 시작", systemImage: "arrowtriangle.right.fill", color: .green, isDisabled: false) { }
+        CustomButton(title: "작업 시작", systemImage: "arrowtriangle.right.fill", color: .green, isDisabled: false) {}
         
-        CustomButton(title: "작업 일시정지", systemImage: "stop.fill", color: .red, isDisabled: false) { }
+        CustomButton(title: "작업 일시정지", systemImage: "stop.fill", color: .red, isDisabled: false) {}
         
-        CustomButton(title: "작업 종료", systemImage: "stopwatch.fill", color: .blue, isDisabled: true) { }
+        CustomButton(title: "작업 종료", systemImage: "stopwatch.fill", color: .blue, isDisabled: true) {}
     }
 }

@@ -9,7 +9,6 @@ import SwiftUI
 
 struct TaskView: View {
     @StateObject var viewModel = TaskViewViewModel()
-    
 
     var body: some View {
         VStack {
@@ -21,6 +20,7 @@ struct TaskView: View {
         }
         .padding(.top, 100)
         .padding(.bottom, 70)
+        .animation(.interactiveSpring, value: viewModel.isCanComplete)
     }
     
     @ViewBuilder
@@ -50,12 +50,30 @@ struct TaskView: View {
     
     @ViewBuilder
     func CompleteTask() -> some View {
-        LargeTitle("어떤 작업을 완료했나요?")
+        let items = viewModel.taskItemList
         
-        Spacer()
+        Text("어떤 작업을 완료했나요?")
+            .font(.largeTitle)
+            .fontWeight(.bold)
+        
+        Carousel(list: items, itemWidth: 200, activeID: $viewModel.activeID) { item, isFocused in
+            TaskItemView(
+                systemName: item.systemName,
+                label: item.label,
+                isFocused: isFocused
+            )
+        }
         
         VStack(spacing: 20) {
             CustomButton(title: "완료", systemImage: "clock.badge.checkmark.fill", color: .green, isDisabled: false) {
+                if let id = viewModel.activeID, let activeItem = items.first(where: { $0.id == id }) {
+                    print("선택된 아이템: \(activeItem)")
+                } else if let firstItem = items.first {
+                    print("선택된 아이템: \(firstItem)")
+                } else {
+                    print("아이템이 없습니다.")
+                }
+                
                 viewModel.initTask()
             }
         }
@@ -65,6 +83,3 @@ struct TaskView: View {
 #Preview {
     TaskView()
 }
-
-
-
