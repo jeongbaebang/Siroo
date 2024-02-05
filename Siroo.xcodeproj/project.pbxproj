@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		434C3F6D2B626A2E00E28A46 /* Carousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434C3F6C2B626A2E00E28A46 /* Carousel.swift */; };
+		4380CA4F2B6CD6C300B2630A /* TaskIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4380CA4E2B6CD6C300B2630A /* TaskIcon.swift */; };
 		43975E902B53ADC1008465EE /* SirooApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43975E8F2B53ADC1008465EE /* SirooApp.swift */; };
 		43975E922B53ADC1008465EE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43975E912B53ADC1008465EE /* ContentView.swift */; };
 		43975E942B53ADC2008465EE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 43975E932B53ADC2008465EE /* Assets.xcassets */; };
@@ -18,12 +19,15 @@
 		4398E68B2B58F0BA001C6CF4 /* formatTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4398E68A2B58F0BA001C6CF4 /* formatTime.swift */; };
 		43C093B92B60E25B00B60165 /* TaskItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C093B82B60E25B00B60165 /* TaskItemView.swift */; };
 		43C093BD2B60F67900B60165 /* TaskItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C093BC2B60F67900B60165 /* TaskItem.swift */; };
+		43D2D3D62B6B3D1500554546 /* TaskModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D2D3D52B6B3D1500554546 /* TaskModalView.swift */; };
+		43D2D3D82B6B3F2A00554546 /* Grabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D2D3D72B6B3F2A00554546 /* Grabbar.swift */; };
 		43E9FCF52B53B5D300DB89E7 /* TaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E9FCF42B53B5D300DB89E7 /* TaskView.swift */; };
 		43E9FCF72B53B61E00DB89E7 /* TaskStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E9FCF62B53B61E00DB89E7 /* TaskStatusView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		434C3F6C2B626A2E00E28A46 /* Carousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Carousel.swift; sourceTree = "<group>"; };
+		4380CA4E2B6CD6C300B2630A /* TaskIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskIcon.swift; sourceTree = "<group>"; };
 		43975E8C2B53ADC1008465EE /* Siroo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Siroo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		43975E8F2B53ADC1008465EE /* SirooApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SirooApp.swift; sourceTree = "<group>"; };
 		43975E912B53ADC1008465EE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -35,6 +39,8 @@
 		4398E68A2B58F0BA001C6CF4 /* formatTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = formatTime.swift; sourceTree = "<group>"; };
 		43C093B82B60E25B00B60165 /* TaskItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskItemView.swift; sourceTree = "<group>"; };
 		43C093BC2B60F67900B60165 /* TaskItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskItem.swift; sourceTree = "<group>"; };
+		43D2D3D52B6B3D1500554546 /* TaskModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModalView.swift; sourceTree = "<group>"; };
+		43D2D3D72B6B3F2A00554546 /* Grabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grabbar.swift; sourceTree = "<group>"; };
 		43E9FCF42B53B5D300DB89E7 /* TaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskView.swift; sourceTree = "<group>"; };
 		43E9FCF62B53B61E00DB89E7 /* TaskStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskStatusView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -93,6 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				43C093BC2B60F67900B60165 /* TaskItem.swift */,
+				4380CA4E2B6CD6C300B2630A /* TaskIcon.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -129,6 +136,7 @@
 				4398E6832B58DA09001C6CF4 /* Button.swift */,
 				4398E6872B58EA55001C6CF4 /* Text.swift */,
 				434C3F6C2B626A2E00E28A46 /* Carousel.swift */,
+				43D2D3D72B6B3F2A00554546 /* Grabbar.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -146,6 +154,7 @@
 			children = (
 				43E9FCF42B53B5D300DB89E7 /* TaskView.swift */,
 				43C093B82B60E25B00B60165 /* TaskItemView.swift */,
+				43D2D3D52B6B3D1500554546 /* TaskModalView.swift */,
 			);
 			path = Task;
 			sourceTree = "<group>";
@@ -225,10 +234,13 @@
 				434C3F6D2B626A2E00E28A46 /* Carousel.swift in Sources */,
 				4398E6842B58DA09001C6CF4 /* Button.swift in Sources */,
 				43975E922B53ADC1008465EE /* ContentView.swift in Sources */,
+				4380CA4F2B6CD6C300B2630A /* TaskIcon.swift in Sources */,
+				43D2D3D62B6B3D1500554546 /* TaskModalView.swift in Sources */,
 				4398E68B2B58F0BA001C6CF4 /* formatTime.swift in Sources */,
 				43C093BD2B60F67900B60165 /* TaskItem.swift in Sources */,
 				43E9FCF72B53B61E00DB89E7 /* TaskStatusView.swift in Sources */,
 				43E9FCF52B53B5D300DB89E7 /* TaskView.swift in Sources */,
+				43D2D3D82B6B3F2A00554546 /* Grabbar.swift in Sources */,
 				4398E6882B58EA55001C6CF4 /* Text.swift in Sources */,
 				43975E902B53ADC1008465EE /* SirooApp.swift in Sources */,
 			);

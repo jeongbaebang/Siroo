@@ -11,7 +11,6 @@ struct TaskItemView: View {
     var systemName: String
     var label: String
     var isFocused: Bool = false
-    
     private let circleSize: CGFloat = 95
     private let CircleBorderSize: CGFloat = 4
     private let imageSize: CGFloat = 40

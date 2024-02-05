@@ -10,17 +10,18 @@ import UIKit
 
 class TaskViewViewModel: ObservableObject {
     @Published var activeID: UUID?
+    @Published var previousActiveID: UUID?
     @Published var isActive = false
     @Published var isPause = false
     @Published var isDone = true
     @Published var secondsElapsed = 0
     @Published var taskItemList: [TaskItem] = [
-        .init(systemName: "heart.fill", label: "작업#1"),
-        .init(systemName: "heart.fill", label: "작업#2"),
-        .init(systemName: "heart.fill", label: "작업#3"),
-        .init(systemName: "heart.fill", label: "작업#4"),
-        .init(systemName: "heart.fill", label: "작업#5"),
-        .init(systemName: "heart.fill", label: "작업#6")
+        .init(systemName: "heart.fill", label: "빈 작업#1"),
+        .init(systemName: "heart.fill", label: "빈 작업#2"),
+        .init(systemName: "heart.fill", label: "빈 작업#3"),
+        .init(systemName: "heart.fill", label: "빈 작업#4"),
+        .init(systemName: "heart.fill", label: "빈 작업#5"),
+        .init(systemName: "heart.fill", label: "빈 작업#6")
     ]
     
     private var timer: Timer?
@@ -28,10 +29,18 @@ class TaskViewViewModel: ObservableObject {
     
     init() {
         setupLifecycleObserver()
+        initializeActiveIDIfNeeded()
     }
     
     deinit {
         cleanupLifecycleObserver()
+    }
+    
+    private func initializeActiveIDIfNeeded() {
+        // taskItemList가 비어있지 않은 경우 첫 번째 요소의 id를 activeID로 설정
+        if let firstItemID = taskItemList.first?.id {
+            activeID = firstItemID
+        }
     }
     
     private func setupLifecycleObserver() {
@@ -90,12 +99,44 @@ class TaskViewViewModel: ObservableObject {
         }
     }
     
-    public var isCanSave: Bool {
+    private func indexOfActiveItem() -> Int {
+        let targetID = hasLastActiveID ? previousActiveID : activeID
+        
+        guard let index = taskItemList.firstIndex(where: { $0.id == targetID }) else {
+            return 0
+        }
+        
+        return index
+    }
+    
+    private var hasLastActiveID: Bool {
+        return previousActiveID != nil
+    }
+    
+    var isCanSave: Bool {
         return secondsElapsed != 0
     }
     
-    public var isCanComplete: Bool {
+    var isCanComplete: Bool {
         return isDone == true && isCanSave
+    }
+    
+    var activeItem: TaskItem {
+        let currentItemIndex = indexOfActiveItem()
+        
+        return taskItemList[currentItemIndex]
+    }
+    
+    func saveLastActiveID() {
+        if activeID != nil {
+            previousActiveID = activeID
+        }
+    }
+    
+    func updateTaskItem<T>(for keyPath: WritableKeyPath<TaskItem, T>, with newValue: T) {
+        let currentItemIndex = indexOfActiveItem()
+        
+        taskItemList[currentItemIndex][keyPath: keyPath] = newValue
     }
     
     func activeStopWatch() {
@@ -126,7 +167,6 @@ class TaskViewViewModel: ObservableObject {
         isActive = false
         isPause = false
         isDone = true
-        activeID = nil
     
         secondsElapsed = 0
     }

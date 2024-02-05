@@ -9,42 +9,63 @@ import SwiftUI
 import UIKit
 
 struct Carousel<Content: View, List: RandomAccessCollection>: View where List.Element: Identifiable {
-    private let PagingControlOffsetY: CGFloat = 120
     var list: List
     var itemWidth: CGFloat
     @Binding var activeID: UUID?
+    @Binding var lastActiveID: UUID?
     @ViewBuilder var content: (List.Element, Bool) -> Content
+    @State private var hasLastActiveID: Bool = false
+    private let pagingControlOffsetY: CGFloat = 120
     
     var body: some View {
         GeometryReader {
-            let size = $0.size
+            let paddingSpacing = ($0.size.width - itemWidth) / 2
             
             ZStack {
-                ScrollView(.horizontal) {
-                    LazyHStack(spacing: 0) {
-                        ForEach(list) { item in
-                            let isFocused = isItemFocused(item)
+                ScrollViewReader { proxy in
+                    ScrollView(.horizontal) {
+                        LazyHStack(spacing: 0) {
+                            ForEach(list) { item in
+                                let isFocused = isItemFocused(item)
+                                
+                                content(item, isFocused)
+                                    .frame(width: itemWidth)
+                                    .scrollTransition { content, phase in
+                                        content
+                                            .scaleEffect(
+                                                x: determineScaleEffect(phase.isIdentity),
+                                                y: determineScaleEffect(phase.isIdentity)
+                                            )
+                                    }
+                            }
+                        }
+                        .scrollTargetLayout()
+                        .padding(.horizontal, paddingSpacing)
+                    }
+                    .scrollIndicators(.hidden)
+                    .scrollTargetBehavior(.viewAligned)
+                    .scrollPosition(id: $activeID, anchor: .center)
+                    .onAppear(perform: {
+                        if let lastActiveID {
+                            hasLastActiveID = true
+                            let itemIndex = indexCalibration(activeID: lastActiveID)
                             
-                            content(item, isFocused)
-                                .frame(width: itemWidth)
-                                .scrollTransition { content, phase in
-                                    content
-                                        .scaleEffect(
-                                        x: determineScaleEffect(phase.isIdentity),
-                                        y: determineScaleEffect(phase.isIdentity)
-                                    )
-                                }
+                            if itemIndex >= 0 {
+                                let targetItemID = list[itemIndex as! List.Index].id
+                                
+                                proxy.scrollTo(targetItemID, anchor: .zero)
+                            }
+                        }
+                    })
+                    .onChange(of: activeID) { _, newValue in
+                        if lastActiveID != nil {
+                            hasLastActiveID = false
+                            lastActiveID = nil
                         }
                     }
-                    .scrollTargetLayout()
-                    .padding(.horizontal, (size.width - itemWidth) / 2)
                 }
-                .scrollIndicators(.hidden)
-                .scrollTargetBehavior(.viewAligned)
-                .scrollPosition(id: $activeID, anchor: .center)
-                
-                PagingControl(numberOfPages: list.count, activePage: activePage)
-                    .offset(y: PagingControlOffsetY)
+                PagingControl(numberOfPages: list.count, activePage: activePageIndex)
+                    .offset(y: pagingControlOffsetY)
             }
         }
     }
@@ -56,21 +77,47 @@ struct Carousel<Content: View, List: RandomAccessCollection>: View where List.El
         return isIdentity ? scalePoint : scaleDefault
     }
     
-    private func isItemFocused(_ item: List.Element) -> Bool {
-        /// 아이디가 없으면 첫번째 요소 반환
-        if activeID == nil {
-            return item.id == list.first?.id
-        }
-        
-        return item.id == activeID as? List.Element.ID
+    private func getCurrentActiveID() -> UUID? {
+        return hasLastActiveID ? lastActiveID : activeID
     }
     
-    private var activePage: Int {
-        if let index = list.firstIndex(where: { $0.id as? UUID == activeID }) as? Int {
+    private func getTargetIndex(id: UUID?) -> Int {
+        let firstIndex = 0
+        
+        if let index = list.firstIndex(where: { $0.id as? UUID == id }) as? Int {
             return index
         }
         
-        return 0
+        return firstIndex
+    }
+    
+    private func isItemFocused(_ item: List.Element) -> Bool {
+        let targetID = getCurrentActiveID()
+        
+        /// 아이디가 없으면 첫번째 요소 반환
+        if hasLastActiveID == false, activeID == nil {
+            return item.id == list.first?.id
+        }
+        
+        return item.id == targetID as? List.Element.ID
+    }
+    
+    private func indexCalibration(activeID: UUID) -> Int {
+        let maxWidth: CGFloat = 400
+        let screenWidth = UIScreen.main.bounds.width
+        let itemIndex = getTargetIndex(id: activeID)
+        
+        if screenWidth > maxWidth {
+            return itemIndex - 1
+        }
+        
+        return itemIndex
+    }
+    
+    private var activePageIndex: Int {
+        let targetID = getCurrentActiveID()
+        
+        return getTargetIndex(id: targetID)
     }
 }
 
@@ -98,6 +145,7 @@ struct PagingControl: UIViewRepresentable {
 
 struct ParentView: View {
     @State var scrolledID: UUID?
+    @State var lastActiveID: UUID?
     @State var items: [TaskItem] = [
         .init(systemName: "heart.fill", label: "작업#1"),
         .init(systemName: "heart.fill", label: "작업#2"),
@@ -114,7 +162,7 @@ struct ParentView: View {
     }
     
     var body: some View {
-        Carousel(list: items, itemWidth: 200, activeID: $scrolledID) { item, isFocused in
+        Carousel(list: items, itemWidth: 200, activeID: $scrolledID,lastActiveID: $lastActiveID) { item, isFocused in
             TaskItemView(systemName: item.systemName, label: item.label, isFocused: isFocused)
         }
     }

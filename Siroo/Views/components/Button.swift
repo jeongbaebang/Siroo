@@ -29,6 +29,18 @@ struct CustomButton: View {
     }
 }
 
+struct CancelButton: View {
+    let buttonSize: CGFloat = 30
+    
+    var body: some View {
+        Image(systemName: "xmark.circle.fill")
+            .resizable()
+            .frame(width: buttonSize, height: buttonSize)
+            .foregroundColor(.gray)
+            .symbolRenderingMode(.hierarchical)
+    }
+}
+
 #Preview {
     VStack(spacing: 20) {
         CustomButton(title: "작업 시작", systemImage: "arrowtriangle.right.fill", color: .green, isDisabled: false) {}
