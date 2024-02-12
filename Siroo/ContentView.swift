@@ -19,7 +19,6 @@ struct ContentView: View {
                     Label("작업현황", systemImage: "chart.bar.fill")
                 }
         }
-        .on
     }
 }
 
