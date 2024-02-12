@@ -15,16 +15,19 @@ class TaskViewViewModel: ObservableObject {
     @Published var isPause = false
     @Published var isDone = true
     @Published var secondsElapsed = 0
+    @Published var activityRecordList: [ActivityRecord] = []
     @Published var taskItemList: [TaskItem] = [
         .init(systemName: .heart, label: "빈 작업#1"),
         .init(systemName: .heart, label: "빈 작업#2"),
         .init(systemName: .heart, label: "빈 작업#3"),
         .init(systemName: .heart, label: "빈 작업#4"),
         .init(systemName: .heart, label: "빈 작업#5"),
-        .init(systemName: .heart, label: "빈 작업#6")
+        .init(systemName: .heart, label: "빈 작업#6"),
+        .init(systemName: .heart, label: "빈 작업#7"),
+        .init(systemName: .heart, label: "빈 작업#8"),
+        .init(systemName: .heart, label: "빈 작업#9"),
     ]
-   @Published var activityRecordList: [ActivityRecord] = []
-    
+   
     private var timer: Timer?
     private var lastBackgroundTime: Date?
     
@@ -32,6 +35,8 @@ class TaskViewViewModel: ObservableObject {
     static let shared = TaskViewViewModel()
     
     private init() {
+        loadTaskItemsToUserDefaults()
+        loadActivityRecordsToUserDefaults()
         setupLifecycleObserver()
         initializeActiveIDIfNeeded()
     }
@@ -45,31 +50,6 @@ class TaskViewViewModel: ObservableObject {
         if let firstItemID = taskItemList.first?.id {
             activeID = firstItemID
         }
-    }
-    
-    func saveActivityRecord() {
-        let currentItemIndex = indexOfActiveItem()
-        let label = activityRecordList.addDuplicateLabel(targetIndex: currentItemIndex, label: activeItem.label)
-        
-        if var item = activityRecordList.first(where: {$0.taskItemID == activeItem.id}) {
-            item.secondsElapsed += secondsElapsed
-            item.label = label
-            item.systemName = activeItem.systemName
-            
-            activityRecordList[currentItemIndex] = item
-        } else {
-            let newRecord = ActivityRecord(
-                taskItemID: activeItem.id,
-                taskItemIndex: currentItemIndex,
-                secondsElapsed: secondsElapsed,
-                systemName: activeItem.systemName,
-                label: label)
-            
-            activityRecordList.append(newRecord)
-        }
-        
-        print(activityRecordList)
-        
     }
     
     private func setupLifecycleObserver() {
@@ -130,6 +110,32 @@ class TaskViewViewModel: ObservableObject {
         }
     }
     
+    private func saveLastResetDate() {
+        let currentDate = Date()
+        
+        UserDefaultsManager.shared.save(currentDate, to: "lastResetDate")
+    }
+    
+    private func loadLastResetDate() -> Date? {
+        if let lastDate = UserDefaultsManager.shared.load(type: Date.self, from: "lastResetDate") {
+            return lastDate
+        }
+        
+        return nil
+    }
+    
+    private func loadTaskItemsToUserDefaults() {
+        if let items: [TaskItem] = UserDefaultsManager.shared.load(type: [TaskItem].self, from: "taskItemList") {
+            taskItemList = items
+        }
+    }
+    
+    private func loadActivityRecordsToUserDefaults() {
+        if let records: [ActivityRecord] = UserDefaultsManager.shared.load(type: [ActivityRecord].self, from: "activityRecordList") {
+            activityRecordList = records
+        }
+    }
+    
     private var currentAcitveID: UUID? {
         return hasPreviousActiveID ? previousActiveID : activeID
     }
@@ -150,6 +156,53 @@ class TaskViewViewModel: ObservableObject {
         let currentItemIndex = indexOfActiveItem()
         
         return taskItemList[currentItemIndex]
+    }
+    
+    func saveActivityRecord() {
+        let currentItemIndex = indexOfActiveItem()
+        let label = activityRecordList.addDuplicateLabel(targetIndex: currentItemIndex, label: activeItem.label)
+        
+        if var item = activityRecordList.first(where: {$0.taskItemID == activeItem.id}) {
+            item.secondsElapsed += secondsElapsed
+            item.label = label
+            item.systemName = activeItem.systemName
+            
+            activityRecordList[currentItemIndex] = item
+        } else {
+            let newRecord = ActivityRecord(
+                taskItemID: activeItem.id,
+                taskItemIndex: currentItemIndex,
+                secondsElapsed: secondsElapsed,
+                systemName: activeItem.systemName,
+                label: label)
+            
+            activityRecordList.append(newRecord)
+        }
+    }
+    
+    func saveTaskItemsToUserDefaults() {
+        UserDefaultsManager.shared.save(taskItemList, to: "taskItemList")
+    }
+    
+    func saveActivityRecordsToUserDefaults() {
+        UserDefaultsManager.shared.save(activityRecordList, to: "activityRecordList")
+    }
+    
+    /// 매번 다음 날짜가 되면 데이터 초기화 로직
+    func resetDataIfNeeded() {
+        let calendaer = Calendar.current
+        let currentDate = Date()
+        
+        if let lastResetDate = loadLastResetDate() {
+            if !calendaer.isDate(currentDate, inSameDayAs: lastResetDate) {
+                activityRecordList = []
+                
+                // 마지막 초기화 날짜 업데이트
+                saveLastResetDate()
+            }
+        } else {
+            saveLastResetDate()
+        }
     }
     
     func indexOfActiveItem() -> Int {
@@ -200,7 +253,7 @@ class TaskViewViewModel: ObservableObject {
                 return modifiedRecord
             }
     }
-    
+
     func activeStopWatch() {
         isActive = true
         isPause = false

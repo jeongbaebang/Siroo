@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct ActivityRecord: Identifiable {
-    let id: UUID = .init()
+struct ActivityRecord: Identifiable, Encodable, Decodable {
+    var id: UUID = .init()
     var addedTime: Date
     var taskItemID: UUID
     var taskItemIndex: Int

@@ -14,7 +14,7 @@ struct ChartView: View {
     private var recordList: [ActivityRecord] {
         return viewModel.activityRecordList
     }
-    @State private var graphType: GraphType = .list
+    @State private var graphType: GraphType = .bar
     @State private var barSelection: String?
     
     var body: some View {
@@ -28,6 +28,7 @@ struct ChartView: View {
                 }
             }
             .pickerStyle(.segmented)
+            
             
             TopRecordDisplayView()
             
@@ -46,6 +47,7 @@ struct ChartView: View {
             Spacer()
         }
         .padding()
+        .animation(graphType == .bar ? .snappy : .none, value: graphType)
     }
     
     @ViewBuilder

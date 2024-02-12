@@ -24,6 +24,7 @@
 		43D2D3D62B6B3D1500554546 /* TaskModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D2D3D52B6B3D1500554546 /* TaskModalView.swift */; };
 		43D2D3D82B6B3F2A00554546 /* Grabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D2D3D72B6B3F2A00554546 /* Grabbar.swift */; };
 		43D748652B70BE39000A750C /* ActivityRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D748642B70BE39000A750C /* ActivityRecord.swift */; };
+		43E6618C2B79D2990075C6CC /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E6618B2B79D2990075C6CC /* UserDefaultsManager.swift */; };
 		43E9FCF52B53B5D300DB89E7 /* TaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E9FCF42B53B5D300DB89E7 /* TaskView.swift */; };
 /* End PBXBuildFile section */
 
@@ -46,6 +47,7 @@
 		43D2D3D52B6B3D1500554546 /* TaskModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModalView.swift; sourceTree = "<group>"; };
 		43D2D3D72B6B3F2A00554546 /* Grabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grabbar.swift; sourceTree = "<group>"; };
 		43D748642B70BE39000A750C /* ActivityRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityRecord.swift; sourceTree = "<group>"; };
+		43E6618B2B79D2990075C6CC /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		43E9FCF42B53B5D300DB89E7 /* TaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -159,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				4398E68A2B58F0BA001C6CF4 /* formatTime.swift */,
+				43E6618B2B79D2990075C6CC /* UserDefaultsManager.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -245,6 +248,7 @@
 			files = (
 				4398E6862B58DAC3001C6CF4 /* TaskViewViewModel.swift in Sources */,
 				43C093B92B60E25B00B60165 /* TaskItemView.swift in Sources */,
+				43E6618C2B79D2990075C6CC /* UserDefaultsManager.swift in Sources */,
 				434C3F6D2B626A2E00E28A46 /* Carousel.swift in Sources */,
 				4398E6842B58DA09001C6CF4 /* Button.swift in Sources */,
 				43336B4F2B734AE2000CFA7A /* GraphType.swift in Sources */,

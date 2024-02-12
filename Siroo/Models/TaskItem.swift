@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct TaskItem: Identifiable {
-    let id: UUID = .init()
+struct TaskItem: Identifiable, Encodable, Decodable {
+    var id: UUID = .init()
     var systemName: TaskIcon
     var label: String
 }

@@ -32,6 +32,9 @@ struct TaskView: View {
         .padding(.top, paddingTop)
         .padding(.bottom, paddingBottom)
         .animation(.interactiveSpring, value: viewModel.isCanComplete)
+        .onAppear {
+            viewModel.resetDataIfNeeded()
+        }
     }
     
     @ViewBuilder
@@ -98,7 +101,10 @@ struct TaskView: View {
         VStack(spacing: buttonSpacing) {
             CustomButton(title: completeButton.0, systemImage: completeButton.1, color: .green, isDisabled: false) {
                 viewModel.savePreviousActiveID()
+                viewModel.resetDataIfNeeded()
                 viewModel.saveActivityRecord()
+                viewModel.saveTaskItemsToUserDefaults()
+                viewModel.saveActivityRecordsToUserDefaults()
                 viewModel.initTask()
             }
         }
