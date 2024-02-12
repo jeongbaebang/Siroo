@@ -7,16 +7,16 @@
 
 import Foundation
 
-enum TaskIcon: String, CaseIterable, Identifiable {
+enum TaskIcon: String, CaseIterable, Identifiable, Encodable, Decodable {
     case heart = "heart.fill"
-    case learning1 = "book.closed"
-    case Learning2 = "graduationcap"
+    case learning = "book.closed"
+    case rest = "cup.and.saucer.fill"
     case work1 = "briefcase"
     case work2 = "desktopcomputer"
     case hobby1 = "paintpalette"
     case hobby2 = "guitars"
-    case exercise1 = "figure.walk"
-    case exercise2 = "sportscourt"
+    case exercise = "figure.walk"
+    case sleep = "bed.double.fill"
     
     var id: String { rawValue }
 }
