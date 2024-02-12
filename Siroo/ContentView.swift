@@ -14,11 +14,12 @@ struct ContentView: View {
                 .tabItem {
                     Label("작업", systemImage: "timer")
                 }
-            TaskStatusView()
+            ChartView()
                 .tabItem {
                     Label("작업현황", systemImage: "chart.bar.fill")
                 }
         }
+        .on
     }
 }
 

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		43336B4D2B7349B4000CFA7A /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43336B4C2B7349B4000CFA7A /* ChartView.swift */; };
+		43336B4F2B734AE2000CFA7A /* GraphType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43336B4E2B734AE2000CFA7A /* GraphType.swift */; };
 		434C3F6D2B626A2E00E28A46 /* Carousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434C3F6C2B626A2E00E28A46 /* Carousel.swift */; };
 		4380CA4F2B6CD6C300B2630A /* TaskIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4380CA4E2B6CD6C300B2630A /* TaskIcon.swift */; };
 		43975E902B53ADC1008465EE /* SirooApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43975E8F2B53ADC1008465EE /* SirooApp.swift */; };
@@ -21,11 +23,13 @@
 		43C093BD2B60F67900B60165 /* TaskItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C093BC2B60F67900B60165 /* TaskItem.swift */; };
 		43D2D3D62B6B3D1500554546 /* TaskModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D2D3D52B6B3D1500554546 /* TaskModalView.swift */; };
 		43D2D3D82B6B3F2A00554546 /* Grabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D2D3D72B6B3F2A00554546 /* Grabbar.swift */; };
+		43D748652B70BE39000A750C /* ActivityRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D748642B70BE39000A750C /* ActivityRecord.swift */; };
 		43E9FCF52B53B5D300DB89E7 /* TaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E9FCF42B53B5D300DB89E7 /* TaskView.swift */; };
-		43E9FCF72B53B61E00DB89E7 /* TaskStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E9FCF62B53B61E00DB89E7 /* TaskStatusView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		43336B4C2B7349B4000CFA7A /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
+		43336B4E2B734AE2000CFA7A /* GraphType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphType.swift; sourceTree = "<group>"; };
 		434C3F6C2B626A2E00E28A46 /* Carousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Carousel.swift; sourceTree = "<group>"; };
 		4380CA4E2B6CD6C300B2630A /* TaskIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskIcon.swift; sourceTree = "<group>"; };
 		43975E8C2B53ADC1008465EE /* Siroo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Siroo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -41,8 +45,8 @@
 		43C093BC2B60F67900B60165 /* TaskItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskItem.swift; sourceTree = "<group>"; };
 		43D2D3D52B6B3D1500554546 /* TaskModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModalView.swift; sourceTree = "<group>"; };
 		43D2D3D72B6B3F2A00554546 /* Grabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grabbar.swift; sourceTree = "<group>"; };
+		43D748642B70BE39000A750C /* ActivityRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityRecord.swift; sourceTree = "<group>"; };
 		43E9FCF42B53B5D300DB89E7 /* TaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskView.swift; sourceTree = "<group>"; };
-		43E9FCF62B53B61E00DB89E7 /* TaskStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskStatusView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +60,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		43336B4B2B734997000CFA7A /* Chart */ = {
+			isa = PBXGroup;
+			children = (
+				43336B4C2B7349B4000CFA7A /* ChartView.swift */,
+			);
+			path = Chart;
+			sourceTree = "<group>";
+		};
 		43975E832B53ADC1008465EE = {
 			isa = PBXGroup;
 			children = (
@@ -100,6 +112,8 @@
 			children = (
 				43C093BC2B60F67900B60165 /* TaskItem.swift */,
 				4380CA4E2B6CD6C300B2630A /* TaskIcon.swift */,
+				43D748642B70BE39000A750C /* ActivityRecord.swift */,
+				43336B4E2B734AE2000CFA7A /* GraphType.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -107,9 +121,9 @@
 		43975E9E2B53B106008465EE /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				4398E6822B58D9D6001C6CF4 /* components */,
+				4398E6822B58D9D6001C6CF4 /* Components */,
 				43C093B72B60E20700B60165 /* Task */,
-				43E9FCF62B53B61E00DB89E7 /* TaskStatusView.swift */,
+				43336B4B2B734997000CFA7A /* Chart */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -130,7 +144,7 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		4398E6822B58D9D6001C6CF4 /* components */ = {
+		4398E6822B58D9D6001C6CF4 /* Components */ = {
 			isa = PBXGroup;
 			children = (
 				4398E6832B58DA09001C6CF4 /* Button.swift */,
@@ -138,7 +152,7 @@
 				434C3F6C2B626A2E00E28A46 /* Carousel.swift */,
 				43D2D3D72B6B3F2A00554546 /* Grabbar.swift */,
 			);
-			path = components;
+			path = Components;
 			sourceTree = "<group>";
 		};
 		4398E6892B58F0A3001C6CF4 /* Utilities */ = {
@@ -233,12 +247,14 @@
 				43C093B92B60E25B00B60165 /* TaskItemView.swift in Sources */,
 				434C3F6D2B626A2E00E28A46 /* Carousel.swift in Sources */,
 				4398E6842B58DA09001C6CF4 /* Button.swift in Sources */,
+				43336B4F2B734AE2000CFA7A /* GraphType.swift in Sources */,
 				43975E922B53ADC1008465EE /* ContentView.swift in Sources */,
 				4380CA4F2B6CD6C300B2630A /* TaskIcon.swift in Sources */,
 				43D2D3D62B6B3D1500554546 /* TaskModalView.swift in Sources */,
+				43336B4D2B7349B4000CFA7A /* ChartView.swift in Sources */,
 				4398E68B2B58F0BA001C6CF4 /* formatTime.swift in Sources */,
+				43D748652B70BE39000A750C /* ActivityRecord.swift in Sources */,
 				43C093BD2B60F67900B60165 /* TaskItem.swift in Sources */,
-				43E9FCF72B53B61E00DB89E7 /* TaskStatusView.swift in Sources */,
 				43E9FCF52B53B5D300DB89E7 /* TaskView.swift in Sources */,
 				43D2D3D82B6B3F2A00554546 /* Grabbar.swift in Sources */,
 				4398E6882B58EA55001C6CF4 /* Text.swift in Sources */,

@@ -8,12 +8,13 @@
 import SwiftUI
 
 struct TaskItemView: View {
-    var systemName: String
+    var systemName: TaskIcon
     var label: String
     var isFocused: Bool = false
-    private let circleSize: CGFloat = 95
-    private let CircleBorderSize: CGFloat = 4
-    private let imageSize: CGFloat = 40
+    
+    let circleSize: CGFloat = 95
+    let CircleBorderSize: CGFloat = 4
+    let imageSize: CGFloat = 40
     
     var body: some View {
         VStack {
@@ -24,7 +25,7 @@ struct TaskItemView: View {
                     .animation(.spring, value: isFocused)
                     .frame(width: circleSize, height: circleSize)
                 
-                Image(systemName: systemName)
+                Image(systemName: systemName.rawValue)
                     .font(.system(size: imageSize))
                     .accessibilityLabel("\(label) 아이콘")
             }
@@ -40,6 +41,6 @@ struct TaskItemView: View {
 
 #Preview {
     HStack {
-        TaskItemView(systemName: "heart.fill", label: "작업#1")
+        TaskItemView(systemName: .heart, label: "작업#1")
     }
 }

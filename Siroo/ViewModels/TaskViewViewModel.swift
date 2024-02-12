@@ -16,18 +16,22 @@ class TaskViewViewModel: ObservableObject {
     @Published var isDone = true
     @Published var secondsElapsed = 0
     @Published var taskItemList: [TaskItem] = [
-        .init(systemName: "heart.fill", label: "빈 작업#1"),
-        .init(systemName: "heart.fill", label: "빈 작업#2"),
-        .init(systemName: "heart.fill", label: "빈 작업#3"),
-        .init(systemName: "heart.fill", label: "빈 작업#4"),
-        .init(systemName: "heart.fill", label: "빈 작업#5"),
-        .init(systemName: "heart.fill", label: "빈 작업#6")
+        .init(systemName: .heart, label: "빈 작업#1"),
+        .init(systemName: .heart, label: "빈 작업#2"),
+        .init(systemName: .heart, label: "빈 작업#3"),
+        .init(systemName: .heart, label: "빈 작업#4"),
+        .init(systemName: .heart, label: "빈 작업#5"),
+        .init(systemName: .heart, label: "빈 작업#6")
     ]
+   @Published var activityRecordList: [ActivityRecord] = []
     
     private var timer: Timer?
     private var lastBackgroundTime: Date?
     
-    init() {
+    /// 싱글톤 패턴 적용
+    static let shared = TaskViewViewModel()
+    
+    private init() {
         setupLifecycleObserver()
         initializeActiveIDIfNeeded()
     }
@@ -41,6 +45,31 @@ class TaskViewViewModel: ObservableObject {
         if let firstItemID = taskItemList.first?.id {
             activeID = firstItemID
         }
+    }
+    
+    func saveActivityRecord() {
+        let currentItemIndex = indexOfActiveItem()
+        let label = activityRecordList.addDuplicateLabel(targetIndex: currentItemIndex, label: activeItem.label)
+        
+        if var item = activityRecordList.first(where: {$0.taskItemID == activeItem.id}) {
+            item.secondsElapsed += secondsElapsed
+            item.label = label
+            item.systemName = activeItem.systemName
+            
+            activityRecordList[currentItemIndex] = item
+        } else {
+            let newRecord = ActivityRecord(
+                taskItemID: activeItem.id,
+                taskItemIndex: currentItemIndex,
+                secondsElapsed: secondsElapsed,
+                systemName: activeItem.systemName,
+                label: label)
+            
+            activityRecordList.append(newRecord)
+        }
+        
+        print(activityRecordList)
+        
     }
     
     private func setupLifecycleObserver() {
@@ -80,13 +109,15 @@ class TaskViewViewModel: ObservableObject {
 
     
     private func startTimer() {
+        let seconds = 1
+        
         if timer == nil {
             timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
                 guard let strongSelf = self else {
                     return
                 }
                 
-                strongSelf.secondsElapsed += 1
+                strongSelf.secondsElapsed += seconds
             }
         }
     }
@@ -99,17 +130,11 @@ class TaskViewViewModel: ObservableObject {
         }
     }
     
-    private func indexOfActiveItem() -> Int {
-        let targetID = hasLastActiveID ? previousActiveID : activeID
-        
-        guard let index = taskItemList.firstIndex(where: { $0.id == targetID }) else {
-            return 0
-        }
-        
-        return index
+    private var currentAcitveID: UUID? {
+        return hasPreviousActiveID ? previousActiveID : activeID
     }
     
-    private var hasLastActiveID: Bool {
+    private var hasPreviousActiveID: Bool {
         return previousActiveID != nil
     }
     
@@ -127,16 +152,53 @@ class TaskViewViewModel: ObservableObject {
         return taskItemList[currentItemIndex]
     }
     
-    func saveLastActiveID() {
+    func indexOfActiveItem() -> Int {
+        guard let index = taskItemList.firstIndex(where: { $0.id == currentAcitveID }) else {
+            return 0
+        }
+        
+        return index
+    }
+    
+    func savePreviousActiveID() {
         if activeID != nil {
             previousActiveID = activeID
         }
     }
     
-    func updateTaskItem<T>(for keyPath: WritableKeyPath<TaskItem, T>, with newValue: T) {
+    func updateTaskItem<T: Equatable >(for keyPath: WritableKeyPath<TaskItem, T>, with newValue: T) {
         let currentItemIndex = indexOfActiveItem()
+        let currentItem = taskItemList[currentItemIndex]
         
-        taskItemList[currentItemIndex][keyPath: keyPath] = newValue
+        // 현재 값과 새로운 값이 같은지 확인.
+        if currentItem[keyPath: keyPath] != newValue {
+            // 값이 다르면, 새로운 값으로 업데이트.
+            taskItemList[currentItemIndex][keyPath: keyPath] = newValue
+        }
+    }
+    
+    func updateRecordItem<T: Equatable>(for keyPath: WritableKeyPath<ActivityRecord, T>, with newValue: T) {
+        let currentItemIndex = indexOfActiveItem()
+            
+            // 변경하려는 값과 다른 값을 가진 레코드가 존재하는지 확인.
+            let hasDifferentValue = activityRecordList.contains { record in
+                // 배열의 다른 요소에 같은 인덱스를 가진 요소가 있고, 해당 속성의 값이 다른지 확인.
+                record.taskItemIndex == currentItemIndex && record[keyPath: keyPath] != newValue
+            }
+            
+            // 모든 해당 레코드가 새로운 값과 같다면, 순회 및 업데이트를 하지 않는다.
+            guard hasDifferentValue else { return }
+            
+            // 변경해야 할 레코드가 있다면, 해당 레코드만 업데이트
+            activityRecordList = activityRecordList.map { record in
+                var modifiedRecord = record
+                
+                if modifiedRecord.taskItemIndex == currentItemIndex {
+                    modifiedRecord[keyPath: keyPath] = newValue
+                }
+                
+                return modifiedRecord
+            }
     }
     
     func activeStopWatch() {

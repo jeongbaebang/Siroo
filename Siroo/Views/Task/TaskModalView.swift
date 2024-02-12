@@ -8,16 +8,16 @@
 import SwiftUI
 
 struct TaskModalView: View {
-    @Environment(\.dismiss) var dismiss
     @ObservedObject var viewModel: TaskViewViewModel
+    
+    @Environment(\.dismiss) var dismiss
     @State private var currentLabel: String
-    @State private var currentIcon: TaskIcon.Icon
+    @State private var currentIcon: TaskIcon
     
     init(viewModel: TaskViewViewModel) {
         self.viewModel = viewModel
-        // viewModel의 activeItem.systemName을 기반으로 draftProfivle 초기값 설정
-        let initialIcon = TaskIcon.Icon.allCases.first(where: { $0.rawValue == viewModel.activeItem.systemName }) ?? TaskIcon.Icon.heart
-        self._currentIcon = State(initialValue: initialIcon)
+        // viewModel의 activeItem.systemName을 기반으로 currentIcon 초기값 설정
+        self._currentIcon = State(initialValue: viewModel.activeItem.systemName)
         // label도 viewModel의 activeItem.label을 기반으로 초기화
         self._currentLabel = State(initialValue: viewModel.activeItem.label)
     }
@@ -35,12 +35,14 @@ struct TaskModalView: View {
     
     @ViewBuilder
     func ModalTop() -> some View {
+        let buttonText = "편집"
+        
         Grabbar()
         
         HStack {
-            Text("편집")
+            Text(buttonText)
                 .font(.title3)
-                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                .fontWeight(.bold)
                 
             Spacer()
             
@@ -70,50 +72,57 @@ struct TaskModalView: View {
     
     @ViewBuilder
     func LabelTextField() -> some View {
+        let labelText = "Label"
+        let fieldPlaceholder = "아이콘 설명을 입력해주세요."
+        let fieldPadding: CGFloat = 20
+        let buttonSystemName = "multiply.circle.fill"
+        let inputContainerRadius: CGFloat = 10
+        
         VStack {
             HStack {
-                Text("Label")
+                Text(labelText)
                 
                 Spacer()
                 
-                TextField("아이콘 설명을 입력해주세요.", text: $currentLabel)
+                TextField(fieldPlaceholder, text: $currentLabel)
                     .multilineTextAlignment(.center)
-                    .padding(.trailing, 20)
+                    .padding(.trailing, fieldPadding)
                 
                 Button(action: {
                     currentLabel = ""
                 }, label: {
-                    Image(systemName: "multiply.circle.fill")
+                    Image(systemName: buttonSystemName)
                         .foregroundColor(.secondary)
                 })
             }
             .padding()
             .background(.regularMaterial)
         }
-        .clipShape(RoundedRectangle(cornerRadius: 10))
+        .clipShape(RoundedRectangle(cornerRadius: inputContainerRadius))
         .padding()
     }
     
     @ViewBuilder
     func IconPicker() -> some View {
         Picker("IconPicker", selection: $currentIcon) {
-            ForEach(TaskIcon.Icon.allCases) { icon in
+            ForEach(TaskIcon.allCases) { icon in
                 Image(systemName: icon.rawValue).tag(icon)
             }
         }
         .pickerStyle(.palette)
         .padding()
-        .onChange(of: currentIcon) { oldValue, newValue in
-            viewModel.updateTaskItem(for: \.systemName, with: newValue.rawValue)
+        .onChange(of: currentIcon) { _, newValue in
+            viewModel.updateTaskItem(for: \.systemName, with: newValue)
         }
         .onDisappear(perform: {
             viewModel.updateTaskItem(for: \.label, with: currentLabel)
+            viewModel.updateRecordItem(for: \.label, with: currentLabel)
         })
     }
 }
 
 #Preview {
-    @StateObject var viewModel = TaskViewViewModel()
+    @ObservedObject var viewModel = TaskViewViewModel.shared
     
     return TaskModalView(viewModel: viewModel)
 }

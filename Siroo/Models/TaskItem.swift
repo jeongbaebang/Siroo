@@ -9,6 +9,6 @@ import Foundation
 
 struct TaskItem: Identifiable {
     let id: UUID = .init()
-    var systemName: String
+    var systemName: TaskIcon
     var label: String
 }
