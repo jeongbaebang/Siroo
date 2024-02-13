@@ -31,6 +31,11 @@ struct TaskModalView: View {
             IconPicker()
             Spacer()
         }
+        .onAppear {
+            if viewModel.indexOfActiveItem() == 0 {
+                viewModel.activeID = nil
+            }
+        }
     }
     
     @ViewBuilder
