@@ -19,6 +19,7 @@
 		4398E6862B58DAC3001C6CF4 /* TaskViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4398E6852B58DAC3001C6CF4 /* TaskViewViewModel.swift */; };
 		4398E6882B58EA55001C6CF4 /* Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4398E6872B58EA55001C6CF4 /* Text.swift */; };
 		4398E68B2B58F0BA001C6CF4 /* formatTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4398E68A2B58F0BA001C6CF4 /* formatTime.swift */; };
+		439D6C922B7B38F7003EFCAC /* Property List.plist in Resources */ = {isa = PBXBuildFile; fileRef = 439D6C912B7B38F7003EFCAC /* Property List.plist */; };
 		43C093B92B60E25B00B60165 /* TaskItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C093B82B60E25B00B60165 /* TaskItemView.swift */; };
 		43C093BD2B60F67900B60165 /* TaskItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C093BC2B60F67900B60165 /* TaskItem.swift */; };
 		43D2D3D62B6B3D1500554546 /* TaskModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D2D3D52B6B3D1500554546 /* TaskModalView.swift */; };
@@ -42,6 +43,7 @@
 		4398E6852B58DAC3001C6CF4 /* TaskViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewViewModel.swift; sourceTree = "<group>"; };
 		4398E6872B58EA55001C6CF4 /* Text.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Text.swift; sourceTree = "<group>"; };
 		4398E68A2B58F0BA001C6CF4 /* formatTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = formatTime.swift; sourceTree = "<group>"; };
+		439D6C912B7B38F7003EFCAC /* Property List.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Property List.plist"; sourceTree = "<group>"; };
 		43C093B82B60E25B00B60165 /* TaskItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskItemView.swift; sourceTree = "<group>"; };
 		43C093BC2B60F67900B60165 /* TaskItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskItem.swift; sourceTree = "<group>"; };
 		43D2D3D52B6B3D1500554546 /* TaskModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModalView.swift; sourceTree = "<group>"; };
@@ -73,6 +75,7 @@
 		43975E832B53ADC1008465EE = {
 			isa = PBXGroup;
 			children = (
+				439D6C912B7B38F7003EFCAC /* Property List.plist */,
 				43975E8E2B53ADC1008465EE /* Siroo */,
 				43975E8D2B53ADC1008465EE /* Products */,
 			);
@@ -213,11 +216,11 @@
 			};
 			buildConfigurationList = 43975E872B53ADC1008465EE /* Build configuration list for PBXProject "Siroo" */;
 			compatibilityVersion = "Xcode 14.0";
-			developmentRegion = en;
+			developmentRegion = ko;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
+				ko,
 			);
 			mainGroup = 43975E832B53ADC1008465EE;
 			productRefGroup = 43975E8D2B53ADC1008465EE /* Products */;
@@ -234,6 +237,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				439D6C922B7B38F7003EFCAC /* Property List.plist in Resources */,
 				43975E972B53ADC2008465EE /* Preview Assets.xcassets in Resources */,
 				43975E942B53ADC2008465EE /* Assets.xcassets in Resources */,
 			);
@@ -321,7 +325,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -378,7 +382,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
