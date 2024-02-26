@@ -17,7 +17,7 @@
 
 사용 언어: Swift
 
-프레임워크: Swfit UI
+프레임워크: Swift UI
 
 ## 📱 서비스 기능 & 데모
 <div align="center">
