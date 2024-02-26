@@ -26,7 +26,6 @@
 <tr>
 <td><img src="https://github.com/jeongbaebang/Siroo/assets/57677452/29a23bd5-770b-433a-bfa6-dd30a38fdf92" alt="Siroo Gif" width="320" height="auto" /></td>
 <td valign="top">
-
 <div align="center">
   
 ### 사용자 시간 상호작용 제공
@@ -42,7 +41,6 @@
 <tr>
 <td><img src="https://github.com/jeongbaebang/Siroo/assets/57677452/cb75e083-a432-4a22-b0c6-7944a3224581" alt="Siroo Gif" width="320" height="auto" /></td>
 <td valign="top">
-
 <div align="center">
   
 ### 상호작용이 풍부한 사용자 작업 스크롤
@@ -57,7 +55,6 @@
 <tr>
 <td><img src="https://github.com/jeongbaebang/Siroo/assets/57677452/a38c880c-d1bb-419d-994e-ed3a66983ec0" alt="Siroo Gif" width="320" height="auto" /></td>
 <td valign="top">
-
 <div align="center">
   
 ### 사용자 작업 편집을 간편하게
@@ -72,7 +69,6 @@
 <tr>
 <td><img src="https://github.com/jeongbaebang/Siroo/assets/57677452/e6acbbcf-75e1-4776-8e29-8837d1b6da9a" alt="Siroo Gif" width="320" height="auto" /></td>
 <td valign="top">
-
 <div align="center">
   
 ### 작업 시간을 시각적으로 쉽게 파악할 수 있도록
@@ -85,9 +81,22 @@
 </tr>
 
 <tr>
+<td><img src="https://github.com/jeongbaebang/Siroo/assets/57677452/81b51d71-8230-45d1-8cf1-61553c8f12cd" alt="Siroo Gif" width="320" height="auto" /></td>
+<td valign="top">
+<div align="center">
+  
+### 오늘 하루만 집중
+
+</div>
+
+- 새로운 하루가 시작되면, 전날 측정된 데이터는 자동으로 삭제됩니다.
+
+</td>
+</tr>
+
+<tr>
 <td><img src="https://github.com/jeongbaebang/Siroo/assets/57677452/1ca0f45c-1e87-48e5-9fe4-c18b06ae7925" alt="Siroo Gif" width="320" height="auto" /></td>
 <td valign="top">
-
 <div align="center">
   
 ### 다크모드와 라이트모드를 자유롭게
