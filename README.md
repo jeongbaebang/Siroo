@@ -9,7 +9,7 @@
 "시루"는 사용자의 일일 활동을 추적하여 시각화함으로써, 누구나 자신의 시간을 효율적으로 관리하고 생산성을 극대화할 수 있도록 돕는 앱입니다.
 <br>
 
-<a href="https://apps.apple.com/us/app/siroo/id6477812074">
+<a href="https://apps.apple.com/us/app/siroo/id6477812074" target="_blank">
     <img src="https://github.com/jeongbaebang/Siroo/assets/57677452/5fca240a-31e6-4a42-b470-0b946a1da66c" width="20%" />
 </a>
 
